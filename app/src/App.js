@@ -3,6 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 import Search from './components/Search';
+import Display from './components/Display';
 
 function App() {
   const TEST_DATA = {
@@ -47,16 +48,10 @@ function App() {
 
   const [weatherData, setWeatherData] = useState(TEST_DATA);
 
-  const axiosParams = {
-    access_key: process.env.REACT_APP_API_KEY,
-    query: '',
-    units: 'f',
-  };
-
-  const asyncGet = async () => {
+  const asyncGet = async (params) => {
     try {
-      // const response = await axios.get('https://api.weatherstack.com/current', { axiosParams });
-      const apiResponse = await axios.get('', { axiosParams });
+      // const response = await axios.get('https://api.weatherstack.com/current', { params });
+      const apiResponse = await axios.get('', { params });
       setWeatherData(apiResponse.data);
       console.log(
         `Current temperature in ${apiResponse.location.name} is ${apiResponse.current.temperature} F`
@@ -68,7 +63,8 @@ function App() {
 
   return (
     <StyledApp>
-      <Search />
+      <Search asyncGet={asyncGet} />
+      <Display data={weatherData} />
     </StyledApp>
   );
 }

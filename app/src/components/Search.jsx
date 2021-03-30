@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const Search = () => {
+const Search = ({ asyncGet }) => {
   const [inputText, setInputText] = useState('');
 
+  const axiosParams = {
+    access_key: process.env.REACT_APP_API_KEY,
+    query: inputText,
+    units: 'f',
+  };
+
   return (
-    <StyledForm>
+    <StyledForm onSubmit={() => asyncGet(axiosParams)}>
       <input
         type="text"
         value={inputText}
