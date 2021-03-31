@@ -50,11 +50,11 @@ function App() {
 
   const asyncGet = async (params) => {
     try {
-      // const response = await axios.get('https://api.weatherstack.com/current', { params });
-      const apiResponse = await axios.get('', { params });
+      const apiResponse = await axios.get('http://api.weatherstack.com/current', { params });
+      // const apiResponse = await axios.get('', { params });
       setWeatherData(apiResponse.data);
       console.log(
-        `Current temperature in ${apiResponse.location.name} is ${apiResponse.current.temperature} F`
+        `Current temperature in ${apiResponse.data.location.name} is ${apiResponse.data.current.temperature} F`
       );
     } catch (error) {
       console.log(error);

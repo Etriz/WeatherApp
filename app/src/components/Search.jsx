@@ -11,14 +11,14 @@ const Search = ({ asyncGet }) => {
   };
 
   return (
-    <StyledForm onSubmit={() => asyncGet(axiosParams)}>
+    <StyledForm onSubmit={(e) => e.preventDefault()}>
       <input
         type="text"
         value={inputText}
         placeholder="Search for a city"
-        onChange={(e) => setInputText(e.value)}
+        onChange={(e) => setInputText(e.target.value)}
       />
-      <button>Search</button>
+      <button onClick={() => asyncGet(axiosParams)}>Search</button>
     </StyledForm>
   );
 };
