@@ -30,11 +30,10 @@ const StyledForm = styled.form`
   justify-content: center;
 
   input {
-    color: #f1f1f1;
     background: none;
     outline: none;
     border: none;
-    border-bottom: 2px solid #f1f1f1;
+    border-bottom: 2px solid gray;
   }
   input:focus {
     box-shadow: 0;
@@ -48,11 +47,13 @@ const StyledForm = styled.form`
 
   button {
     outline: none;
-    border: none;
+    border: 1px solid #424242;
     margin: 0 0 0 1rem;
     border-radius: 0.25rem;
   }
   button:hover {
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0);
     background: linear-gradient(90deg, rgba(17, 153, 142, 1) 0%, rgba(56, 239, 117, 1) 100%);
     color: #f1f1f1;
   }

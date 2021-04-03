@@ -62,7 +62,7 @@ const Display = ({ data }) => {
   return (
     <StyledDisplay>
       <div>
-        <h4>{`${data.location.name}`}</h4>
+        <h4>{`${data.test || data.location.name}`}</h4>
         <span>{time}</span>
         <p>{`${data.current.temperature}° F`}</p>
         <img src={icon} alt={data.current.weather_descriptions[0]} />
@@ -75,17 +75,16 @@ const Display = ({ data }) => {
 export default Display;
 
 const StyledDisplay = styled.div`
-  /* width: 75%; */
   max-width: 16rem;
   color: #424242;
   margin: 1rem auto;
-  padding: 0.25rem;
+  padding: 3px;
   border-radius: 0.5rem;
   background: linear-gradient(
     135deg,
     rgba(17, 153, 142, 1) 0%,
-    rgba(0, 0, 0, 0) 25%,
-    rgba(0, 0, 0, 0) 75%,
+    rgba(0, 0, 0, 0) 15%,
+    rgba(0, 0, 0, 0) 85%,
     rgba(56, 239, 117, 1) 100%
   );
 

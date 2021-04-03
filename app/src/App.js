@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
@@ -7,6 +7,7 @@ import Display from './components/Display';
 
 function App() {
   const TEST_DATA = {
+    test: 'Sample City',
     request: {
       type: 'City',
       query: 'New York, United States of America',
@@ -49,17 +50,23 @@ function App() {
   const [weatherData, setWeatherData] = useState(TEST_DATA);
 
   const asyncGet = async (params) => {
-    try {
-      const apiResponse = await axios.get('http://api.weatherstack.com/current', { params });
-      // const apiResponse = await axios.get('', { params });
-      setWeatherData(apiResponse.data);
-      console.log(
-        `Current temperature in ${apiResponse.data.location.name} is ${apiResponse.data.current.temperature} F`
-      );
-    } catch (error) {
-      console.log(error);
-    }
+    const apiResponse = await axios.get('http://api.weatherstack.com/current', { params });
+    apiResponse.data.success === true
+      ? setWeatherData(apiResponse.data)
+      : setWeatherData(TEST_DATA);
   };
+
+  useEffect(
+    () => {
+      asyncGet({
+        access_key: process.env.REACT_APP_API_KEY,
+        query: 'Sioux Falls',
+        units: 'f',
+      });
+    },
+    // eslint-disable-next-line
+    []
+  );
 
   return (
     <StyledApp>
@@ -72,11 +79,8 @@ function App() {
 export default App;
 
 const StyledApp = styled.div`
-  /* border: 1px solid black; */
   width: 80%;
   max-width: 750px;
   margin: 0 auto;
   padding: 2rem;
-  background: #424242;
-  color: #fafafa;
 `;
