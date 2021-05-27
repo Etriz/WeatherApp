@@ -51,9 +51,7 @@ function App() {
 
   const asyncGet = async (params) => {
     const apiResponse = await axios.get('http://api.weatherstack.com/current', { params });
-    apiResponse.data.success === true
-      ? setWeatherData(apiResponse.data)
-      : setWeatherData(TEST_DATA);
+    apiResponse.data ? setWeatherData(apiResponse.data) : setWeatherData(TEST_DATA);
   };
 
   useEffect(

@@ -50,6 +50,7 @@ const StyledForm = styled.form`
     border: 1px solid #424242;
     margin: 0 0 0 1rem;
     border-radius: 0.25rem;
+    background: #fafafa;
   }
   button:hover {
     outline: none;

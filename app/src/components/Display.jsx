@@ -18,40 +18,25 @@ const Display = ({ data }) => {
         icon = './icons/cloud-sun.svg';
       } else icon = './icons/cloud-moon.svg';
       break;
-    case 119 || 122:
+    case (119, 122):
       icon = './icons/cloud.svg';
       break;
-    case 179 || 227 || 230 || 329 || 332 || 335 || 338 || 371:
+    case (179, 227, 230, 329, 332, 335, 338, 371):
       icon = './icons/snow-alt.svg';
       break;
-    case 143 || 248 || 260:
+    case (143, 248, 260):
       icon = './icons/fog.svg';
       break;
-    case 176 ||
-      182 ||
-      185 ||
-      263 ||
-      266 ||
-      281 ||
-      284 ||
-      293 ||
-      296 ||
-      299 ||
-      302 ||
-      305 ||
-      308 ||
-      353 ||
-      356 ||
-      359:
+    case (176, 182, 185, 263, 266, 281, 284, 293, 296, 299, 302, 305, 308, 356, 353, 359):
       icon = './icons/rain.svg';
       break;
-    case 311 || 314 || 317 || 320 || 323 || 326 || 362 || 365 || 368:
+    case (311, 314, 317, 320, 323, 326, 362, 365, 368):
       icon = './icons/snow.svg';
       break;
-    case 350 || 374 || 377:
+    case (350, 374, 377):
       icon = './icons/hail.svg';
       break;
-    case 386 || 389 || 392 || 395:
+    case (386, 389, 392, 395):
       icon = './icons/lightning.svg';
       break;
     default:
