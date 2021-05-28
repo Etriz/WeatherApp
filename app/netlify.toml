@@ -1,5 +1,5 @@
 [[redirects]]
 from = "https://api.weatherstack.com/*"
-to = "http://api.weatherstack.com/*"
+to = "http://api.weatherstack.com/:splat"
 status = 301
 force = true
