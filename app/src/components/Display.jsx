@@ -2,56 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Display = ({ data }) => {
-  const time = new Date(data.location.localtime).toLocaleTimeString([], { timeStyle: 'short' });
-
-  const code = data.current.weather_code;
-  let icon = '';
-
-  switch (code) {
-    case 113:
-      if (data.current.is_day === 'yes') {
-        icon = './icons/sun.svg';
-      } else icon = './icons/moon.svg';
-      break;
-    case 116:
-      if (data.current.is_day === 'yes') {
-        icon = './icons/cloud-sun.svg';
-      } else icon = './icons/cloud-moon.svg';
-      break;
-    case (119, 122):
-      icon = './icons/cloud.svg';
-      break;
-    case (179, 227, 230, 329, 332, 335, 338, 371):
-      icon = './icons/snow-alt.svg';
-      break;
-    case (143, 248, 260):
-      icon = './icons/fog.svg';
-      break;
-    case (176, 182, 185, 263, 266, 281, 284, 293, 296, 299, 302, 305, 308, 356, 353, 359):
-      icon = './icons/rain.svg';
-      break;
-    case (311, 314, 317, 320, 323, 326, 362, 365, 368):
-      icon = './icons/snow.svg';
-      break;
-    case (350, 374, 377):
-      icon = './icons/hail.svg';
-      break;
-    case (386, 389, 392, 395):
-      icon = './icons/lightning.svg';
-      break;
-    default:
-      icon = data.current.weather_icons;
-      break;
-  }
+  const time = new Date(data.dt * 1000).toLocaleTimeString([], {
+    timeStyle: 'short',
+  });
 
   return (
     <StyledDisplay>
       <div>
-        <h4>{`${data.test || data.location.name}`}</h4>
+        <h4>{`${data.name}`}</h4>
         <span>{time}</span>
-        <p>{`${data.current.temperature}° F`}</p>
-        <img src={icon} alt={data.current.weather_descriptions[0]} />
-        <span>{`${data.current.weather_descriptions}`}</span>
+        <p>{`${data.main.temp.toFixed()}° F`}</p>
+        {/* <img src={icon} alt={data.current.weather_descriptions[0]} /> */}
+        <span>{`${data.weather[0].description}`}</span>
       </div>
     </StyledDisplay>
   );

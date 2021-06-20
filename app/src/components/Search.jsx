@@ -4,10 +4,13 @@ import styled from 'styled-components';
 const Search = ({ asyncGet }) => {
   const [inputText, setInputText] = useState('');
 
-  const axiosParams = {
-    access_key: process.env.REACT_APP_API_KEY,
-    query: inputText,
-    units: 'f',
+  // const axiosParams = {
+  //   query: inputText,
+  // };
+
+  const search = () => {
+    asyncGet(inputText);
+    setInputText('');
   };
 
   return (
@@ -18,7 +21,7 @@ const Search = ({ asyncGet }) => {
         placeholder="Search for a city"
         onChange={(e) => setInputText(e.target.value)}
       />
-      <button onClick={() => asyncGet(axiosParams)}>Search</button>
+      <button onClick={() => search()}>Search</button>
     </StyledForm>
   );
 };

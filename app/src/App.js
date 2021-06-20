@@ -1,66 +1,72 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import dotenv from 'dotenv';
 
 import Search from './components/Search';
 import Display from './components/Display';
 
+dotenv.config();
+
 function App() {
   const TEST_DATA = {
-    test: 'Sample City',
-    request: {
-      type: 'City',
-      query: 'New York, United States of America',
-      language: 'en',
-      unit: 'm',
+    coord: {
+      lon: -122.0838,
+      lat: 37.3861,
     },
-    location: {
-      name: 'New York',
-      country: 'United States of America',
-      region: 'New York',
-      lat: '40.714',
-      lon: '-74.006',
-      timezone_id: 'America/New_York',
-      localtime: '2021-03-30 00:11',
-      localtime_epoch: 1617063060,
-      utc_offset: '-4.0',
+    weather: [
+      {
+        id: 800,
+        main: 'Clear',
+        description: 'clear sky',
+        icon: '01d',
+      },
+    ],
+    base: 'stations',
+    main: {
+      temp: 84.88,
+      feels_like: 84.02,
+      temp_min: 58.66,
+      temp_max: 101.21,
+      pressure: 1006,
+      humidity: 39,
     },
-    current: {
-      observation_time: '04:11 AM',
-      temperature: 9,
-      weather_code: 113,
-      weather_icons: [
-        'https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0008_clear_sky_night.png',
-      ],
-      weather_descriptions: ['Clear'],
-      wind_speed: 0,
-      wind_degree: 0,
-      wind_dir: 'N',
-      pressure: 1026,
-      precip: 0,
-      humidity: 31,
-      cloudcover: 0,
-      feelslike: 8,
-      uv_index: 1,
-      visibility: 16,
-      is_day: 'no',
+    visibility: 10000,
+    wind: {
+      speed: 1.99,
+      deg: 51,
+      gust: 8.99,
     },
+    clouds: {
+      all: 1,
+    },
+    dt: 1624134007,
+    sys: {
+      type: 2,
+      id: 2017352,
+      country: 'US',
+      sunrise: 1624106854,
+      sunset: 1624159919,
+    },
+    timezone: -25200,
+    id: 5375480,
+    name: 'Mountain View',
+    cod: 200,
   };
 
   const [weatherData, setWeatherData] = useState(TEST_DATA);
 
-  const asyncGet = async (params) => {
-    const apiResponse = await axios.get('http://api.weatherstack.com/current', { params });
-    apiResponse.data.error ? setWeatherData(TEST_DATA) : setWeatherData(apiResponse.data);
+  const asyncGet = async (city) => {
+    const apiResponse = await axios.get(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}&units=imperial`
+    );
+    // console.log(apiResponse);
+    apiResponse.status !== 200 ? setWeatherData(TEST_DATA) : setWeatherData(apiResponse.data);
   };
 
   useEffect(
     () => {
-      asyncGet({
-        access_key: process.env.REACT_APP_API_KEY,
-        query: 'Sioux Falls',
-        units: 'f',
-      });
+      asyncGet('Chicago');
     },
     // eslint-disable-next-line
     []
